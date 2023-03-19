@@ -1,0 +1,21 @@
+name: Auto Test Script
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: main
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+          python-version: '3.x'
+          architecture: 'x64'
+    - name: Run test script
+      run: |
+         python scripts/main.py --all
